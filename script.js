@@ -111,7 +111,7 @@ startBtn.addEventListener("click", () => {
 
             alarmSound.currentTime = 0;
             alarmSound.play();
-        saveSessionHistory(display.textContent);
+        saveSessionHistory(timerDisplay.textContent);
             showRandomQuote();
 
             document.getElementById("completionMessage").textContent =
