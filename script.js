@@ -7,6 +7,7 @@ let resetBtn = document.getElementById("resetBtn");
 let totalTime = 0;
 let timer;
 let isRunning = false;
+let originalTime ="";
 let hoursInput = document.getElementById("hoursInput");
 let minutesInput = document.getElementById("minutesInput");
 let secondsInput = document.getElementById("secondsInput");
@@ -87,7 +88,7 @@ setTimerBtn.addEventListener("click", () => {
     let secs = parseInt(secondsInput.value) || 0;
 
     totalTime = (hrs * 3600) + (mins * 60) + secs;
-
+    originalTime = `${hrs.toString().padStart(2, "0")}:${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
     if (totalTime <= 0) {
         alert("Please enter valid time");
         return;
@@ -107,7 +108,7 @@ startBtn.addEventListener("click", () => {
 
         if (totalTime <= 0) {
 
-            let completedTime = timerDisplay.textContent;
+            let completedTime = originalTime;
 
             clearInterval(timer);
 
