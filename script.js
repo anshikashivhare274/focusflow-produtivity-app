@@ -111,6 +111,7 @@ startBtn.addEventListener("click", () => {
 
             alarmSound.currentTime = 0;
             alarmSound.play();
+        saveSessionHistory(display.textContent);
             showRandomQuote();
 
             document.getElementById("completionMessage").textContent =
@@ -208,6 +209,8 @@ window.onload = () => {
     savedTasks.forEach(task => {
         addTask(task);
     });
+
+    loadSessionHistory();
 
     
 };
@@ -325,4 +328,52 @@ function showRandomQuote() {
 
     document.getElementById("quoteText").textContent =
         quotes[randomIndex];
+}
+
+function saveSessionHistory(sessionTime) {
+
+    let history =
+        JSON.parse(localStorage.getItem("sessionHistory"))
+        || [];
+
+    let currentTime =
+        new Date().toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+    history.push(
+        `✅ ${sessionTime} completed at ${currentTime}`
+    );
+
+    localStorage.setItem(
+        "sessionHistory",
+        JSON.stringify(history)
+    );
+
+    loadSessionHistory();
+
+}
+
+function loadSessionHistory() {
+
+    let history =
+        JSON.parse(localStorage.getItem("sessionHistory"))
+        || [];
+
+    let historyList =
+        document.getElementById("sessionHistory");
+
+    historyList.innerHTML = "";
+
+    history.forEach(session => {
+
+        let li = document.createElement("li");
+
+        li.textContent = session;
+
+        historyList.appendChild(li);
+
+    });
+
 }
