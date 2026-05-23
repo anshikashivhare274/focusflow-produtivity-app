@@ -109,7 +109,7 @@ startBtn.addEventListener("click", () => {
 
         if (totalTime <= 0) {
 
-            let completedTime = currentDisplayedTime;
+            let completedTime = originalTime;
 
             clearInterval(timer);
 
